@@ -75,8 +75,8 @@ A modern, responsive, high-performance web platform and reservation management p
 
 1. **Clone the repository**:
    ```bash
-   git clone <repo-url>
-   cd "Hotel Shriram International Website"
+   git clone https://github.com/prabhve/demoshriraminternationalantiwebsite.git
+   cd demoshriraminternationalantiwebsite
    ```
 
 2. **Install dependencies**:
