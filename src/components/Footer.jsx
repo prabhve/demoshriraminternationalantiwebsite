@@ -14,7 +14,7 @@ import {
 
 export const Footer = ({ onOpenAdmin, onOpenBooking }) => {
   return (
-    <footer className="bg-[#05080f] text-slate-400 pt-16 pb-12 px-4 sm:px-6 lg:px-8 border-t border-slate-800/80 relative">
+    <footer className="bg-[#05080f] text-slate-400 pt-16 pb-28 md:pb-12 px-4 sm:px-6 lg:px-8 border-t border-slate-800/80 relative">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           

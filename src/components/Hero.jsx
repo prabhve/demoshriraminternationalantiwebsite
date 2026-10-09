@@ -152,7 +152,7 @@ export const Hero = ({ onOpenBookingWithDetails }) => {
             <div className="glass-panel p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-2xl border border-amber-500/30 backdrop-blur-2xl">
               <form onSubmit={handleQuickBook} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
                 {/* Check-In Date */}
-                <div className="bg-slate-900/90 p-3 rounded-xl border border-slate-700/60 focus-within:border-amber-400 transition hover:border-amber-500/40">
+                <div className="bg-slate-900/90 p-3.5 sm:p-3 rounded-xl border border-slate-700/60 focus-within:border-amber-400 transition hover:border-amber-500/40">
                   <label className="text-[11px] font-semibold tracking-wider text-amber-400 uppercase flex items-center gap-1.5 mb-1">
                     <Calendar className="w-3.5 h-3.5" /> Check-In Date
                   </label>
@@ -161,13 +161,13 @@ export const Hero = ({ onOpenBookingWithDetails }) => {
                     value={checkIn}
                     min={new Date().toISOString().split('T')[0]}
                     onChange={(e) => setCheckIn(e.target.value)}
-                    className="w-full bg-transparent text-white text-sm font-medium focus:outline-none cursor-pointer"
+                    className="w-full bg-transparent text-white text-[16px] sm:text-sm font-medium focus:outline-none cursor-pointer"
                     required
                   />
                 </div>
 
                 {/* Check-Out Date */}
-                <div className="bg-slate-900/90 p-3 rounded-xl border border-slate-700/60 focus-within:border-amber-400 transition hover:border-amber-500/40">
+                <div className="bg-slate-900/90 p-3.5 sm:p-3 rounded-xl border border-slate-700/60 focus-within:border-amber-400 transition hover:border-amber-500/40">
                   <label className="text-[11px] font-semibold tracking-wider text-amber-400 uppercase flex items-center gap-1.5 mb-1">
                     <Calendar className="w-3.5 h-3.5" /> Check-Out Date
                   </label>
@@ -176,20 +176,20 @@ export const Hero = ({ onOpenBookingWithDetails }) => {
                     value={checkOut}
                     min={checkIn}
                     onChange={(e) => setCheckOut(e.target.value)}
-                    className="w-full bg-transparent text-white text-sm font-medium focus:outline-none cursor-pointer"
+                    className="w-full bg-transparent text-white text-[16px] sm:text-sm font-medium focus:outline-none cursor-pointer"
                     required
                   />
                 </div>
 
                 {/* Room Selection */}
-                <div className="bg-slate-900/90 p-3 rounded-xl border border-slate-700/60 focus-within:border-amber-400 transition hover:border-amber-500/40">
+                <div className="bg-slate-900/90 p-3.5 sm:p-3 rounded-xl border border-slate-700/60 focus-within:border-amber-400 transition hover:border-amber-500/40">
                   <label className="text-[11px] font-semibold tracking-wider text-amber-400 uppercase flex items-center gap-1.5 mb-1">
                     <BedDouble className="w-3.5 h-3.5" /> Room Category
                   </label>
                   <select
                     value={selectedRoomId}
                     onChange={(e) => setSelectedRoomId(e.target.value)}
-                    className="w-full bg-slate-900 text-white text-sm font-medium focus:outline-none cursor-pointer py-0.5"
+                    className="w-full bg-slate-900 text-white text-[16px] sm:text-sm font-medium focus:outline-none cursor-pointer py-0.5"
                   >
                     {ROOMS.map((room) => (
                       <option key={room.id} value={room.id}>

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Phone, MessageSquare, Calendar, Navigation } from 'lucide-react';
+import { Phone, MessageSquare, Calendar } from 'lucide-react';
 import { HOTEL_INFO } from '../data/hotelData';
 
 export const FloatingActions = ({ onOpenBooking }) => {
   return (
-    <div className="fixed bottom-6 right-4 sm:right-6 z-40 flex flex-col items-end gap-3 pointer-events-auto">
+    <div className="hidden md:flex fixed bottom-6 right-6 z-40 flex-col items-end gap-3 pointer-events-auto">
       {/* WhatsApp Quick Chat */}
       <a
         href={`https://wa.me/${HOTEL_INFO.whatsappNumber}?text=Hello%20Hotel%20Shri%20Ram%20International,%20I%20want%20to%20inquire%20about%20room%20booking%20and%20rates.`}

@@ -317,7 +317,7 @@ export const BookingModal = ({ isOpen, onClose, initialData, onAddBooking }) => 
                       placeholder="Full Name *"
                       value={customerName}
                       onChange={(e) => setCustomerName(e.target.value)}
-                      className="w-full p-3 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white text-xs placeholder:text-slate-500 focus:border-amber-400 focus:outline-none"
+                      className="w-full p-3.5 sm:p-3 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white text-[16px] sm:text-xs placeholder:text-slate-500 focus:border-amber-400 focus:outline-none"
                       required
                     />
                   </div>
@@ -328,7 +328,7 @@ export const BookingModal = ({ isOpen, onClose, initialData, onAddBooking }) => 
                       placeholder="Mobile Number (e.g. 9839XXXXXX) *"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="w-full p-3 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white text-xs placeholder:text-slate-500 focus:border-amber-400 focus:outline-none"
+                      className="w-full p-3.5 sm:p-3 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white text-[16px] sm:text-xs placeholder:text-slate-500 focus:border-amber-400 focus:outline-none"
                       required
                     />
                   </div>
@@ -339,7 +339,7 @@ export const BookingModal = ({ isOpen, onClose, initialData, onAddBooking }) => 
                       placeholder="Email Address (Optional)"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full p-3 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white text-xs placeholder:text-slate-500 focus:border-amber-400 focus:outline-none"
+                      className="w-full p-3.5 sm:p-3 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white text-[16px] sm:text-xs placeholder:text-slate-500 focus:border-amber-400 focus:outline-none"
                     />
                   </div>
 
@@ -349,7 +349,7 @@ export const BookingModal = ({ isOpen, onClose, initialData, onAddBooking }) => 
                       placeholder="City / Company Name (Optional)"
                       value={city}
                       onChange={(e) => setCity(e.target.value)}
-                      className="w-full p-3 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white text-xs placeholder:text-slate-500 focus:border-amber-400 focus:outline-none"
+                      className="w-full p-3.5 sm:p-3 rounded-xl bg-slate-900/90 border border-slate-700/80 text-white text-[16px] sm:text-xs placeholder:text-slate-500 focus:border-amber-400 focus:outline-none"
                     />
                   </div>
                 </div>

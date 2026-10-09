@@ -13,6 +13,7 @@ import { Footer } from './components/Footer';
 import { BookingModal } from './components/BookingModal';
 import { AdminDashboard } from './components/AdminDashboard';
 import { FloatingActions } from './components/FloatingActions';
+import { MobileBottomNav } from './components/MobileBottomNav';
 import { ScrollProgressBar } from './components/ScrollProgressBar';
 import { INITIAL_BOOKINGS } from './data/hotelData';
 
@@ -122,8 +123,18 @@ export function App() {
         }}
       />
 
-      {/* Floating Action Buttons */}
+      {/* Desktop Floating Action Buttons */}
       <FloatingActions onOpenBooking={() => setIsBookingModalOpen(true)} />
+
+      {/* Mobile Sticky Thumb Navigation Dock */}
+      <MobileBottomNav
+        onOpenBooking={() => {
+          setBookingInitialData(null);
+          setIsBookingModalOpen(true);
+        }}
+        onOpenAdmin={() => setIsAdminOpen(true)}
+        pendingCount={pendingCount}
+      />
 
       {/* Interactive Customer Booking Modal */}
       <BookingModal

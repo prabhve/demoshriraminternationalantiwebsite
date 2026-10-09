@@ -254,10 +254,10 @@ export const AdminDashboard = ({
 
           {/* Sub Navigation Tabs */}
           <div className="flex items-center justify-between gap-2 flex-wrap">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 max-w-full scrollbar-none w-full sm:w-auto">
               <button
                 onClick={() => setActiveTab('bookings')}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer ${
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition cursor-pointer shrink-0 whitespace-nowrap ${
                   activeTab === 'bookings'
                     ? 'bg-amber-500 text-slate-950 shadow-md'
                     : 'bg-slate-900 text-slate-300 hover:text-white'
@@ -268,25 +268,25 @@ export const AdminDashboard = ({
 
               <button
                 onClick={() => setActiveTab('new-booking')}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer flex items-center gap-1.5 ${
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition cursor-pointer flex items-center gap-1.5 shrink-0 whitespace-nowrap ${
                   activeTab === 'new-booking'
                     ? 'bg-amber-500 text-slate-950 shadow-md'
                     : 'bg-slate-900 text-slate-300 hover:text-white'
                 }`}
               >
                 <Plus className="w-3.5 h-3.5" />
-                <span>New Walk-in / Phone Reservation</span>
+                <span>New Reservation</span>
               </button>
 
               <button
                 onClick={() => setActiveTab('rooms')}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer ${
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition cursor-pointer shrink-0 whitespace-nowrap ${
                   activeTab === 'rooms'
                     ? 'bg-amber-500 text-slate-950 shadow-md'
                     : 'bg-slate-900 text-slate-300 hover:text-white'
                 }`}
               >
-                Room Rates & Inventory
+                Room Rates & Status
               </button>
             </div>
 

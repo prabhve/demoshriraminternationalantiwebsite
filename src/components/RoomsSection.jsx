@@ -36,13 +36,13 @@ export const RoomsSection = ({ onSelectRoomForBooking }) => {
             Every room at Hotel Shri Ram International is thoughtfully appointed with modern air-conditioning, plush bedding, high-speed internet, and round-the-clock room service.
           </p>
 
-          {/* Category Filter Pills */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
+          {/* Category Filter Pills (Mobile Horizontal Scrollable) */}
+          <div className="flex sm:flex-wrap items-center sm:justify-center gap-2 mt-8 overflow-x-auto pb-2 sm:pb-0 px-2 sm:px-0 scrollbar-none max-w-full">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
+                className={`px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer shrink-0 whitespace-nowrap ${
                   activeCategory === category
                     ? 'bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/25 scale-105'
                     : 'bg-slate-900/90 text-slate-300 border border-slate-800 hover:border-amber-400/40 hover:text-white'
@@ -234,8 +234,8 @@ export const RoomsSection = ({ onSelectRoomForBooking }) => {
             </div>
 
             {/* Modal Footer */}
-            <div className="p-6 border-t border-slate-800 bg-slate-900/90 flex items-center justify-between gap-4">
-              <div>
+            <div className="p-4 sm:p-6 border-t border-slate-800 bg-slate-900/90 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+              <div className="flex items-center justify-between sm:block">
                 <span className="text-xs text-slate-400">Direct booking price:</span>
                 <div className="text-xl font-bold font-serif text-amber-400">
                   ₹{selectedRoomModal.price} <span className="text-xs text-slate-300 font-sans font-normal">+ taxes</span>
@@ -248,7 +248,7 @@ export const RoomsSection = ({ onSelectRoomForBooking }) => {
                   setSelectedRoomModal(null);
                   onSelectRoomForBooking(id);
                 }}
-                className="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/30 hover:scale-105 transition cursor-pointer"
+                className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/30 hover:scale-105 active:scale-95 transition cursor-pointer text-center"
               >
                 Proceed to Book This Room
               </button>

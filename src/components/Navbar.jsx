@@ -149,18 +149,38 @@ export const Navbar = ({ onOpenBooking, onOpenAdmin, pendingCount }) => {
                   setMobileMenuOpen(false);
                   onOpenBooking();
                 }}
-                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-amber-500 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/30"
+                className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/30"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Book Room Now</span>
               </button>
+
+              <div className="grid grid-cols-2 gap-2">
+                <a
+                  href={`tel:${HOTEL_INFO.phone}`}
+                  className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-slate-800 text-amber-400 font-semibold text-xs border border-slate-700"
+                >
+                  <Phone className="w-3.5 h-3.5" />
+                  <span>Call Hotel</span>
+                </a>
+
+                <a
+                  href={`https://wa.me/${HOTEL_INFO.whatsappNumber}?text=Hello%20Hotel%20Shri%20Ram%20International,%20I%20want%20to%20inquire%20about%20booking.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-emerald-600/20 text-emerald-400 font-semibold text-xs border border-emerald-500/30"
+                >
+                  <MessageSquare className="w-3.5 h-3.5" />
+                  <span>WhatsApp</span>
+                </a>
+              </div>
 
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   onOpenAdmin();
                 }}
-                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-slate-800 text-amber-300 font-medium text-sm border border-amber-500/30"
+                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-slate-800/90 text-amber-300 font-medium text-xs border border-amber-500/30"
               >
                 <ShieldCheck className="w-4 h-4" />
                 <span>Hotel Staff / Admin Panel</span>

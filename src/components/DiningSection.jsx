@@ -153,13 +153,13 @@ export const DiningSection = ({ onOpenBooking }) => {
             <h3 className="font-serif text-2xl font-bold text-white mb-2">Signature Menu Favorites</h3>
             <p className="text-xs sm:text-sm text-slate-400">Popular dishes loved by our guests and local food lovers</p>
             
-            {/* Category Switcher Tabs */}
-            <div className="flex flex-wrap items-center justify-center gap-2 mt-6">
+            {/* Category Switcher Tabs (Mobile Horizontal Scrollable) */}
+            <div className="flex sm:flex-wrap items-center sm:justify-center gap-2 mt-6 overflow-x-auto pb-2 sm:pb-0 px-2 sm:px-0 scrollbar-none max-w-full">
               {MENU_HIGHLIGHTS.map((menuCat, idx) => (
                 <button
                   key={idx}
                   onClick={() => setActiveTab(idx)}
-                  className={`px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
+                  className={`px-5 py-2.5 sm:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer shrink-0 whitespace-nowrap ${
                     activeTab === idx
                       ? 'bg-amber-500 text-slate-950 font-bold shadow-lg shadow-amber-500/25 scale-105'
                       : 'bg-slate-900 text-slate-300 border border-slate-800 hover:text-white'

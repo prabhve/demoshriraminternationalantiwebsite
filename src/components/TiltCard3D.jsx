@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 export const TiltCard3D = ({ 
@@ -10,6 +10,15 @@ export const TiltCard3D = ({
 }) => {
   const cardRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    // Detect touch / mobile devices to optimize scrolling performance
+    if (typeof window !== 'undefined') {
+      const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      setIsTouchDevice(!hasFinePointer);
+    }
+  }, []);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -26,7 +35,7 @@ export const TiltCard3D = ({
   const glareY = useTransform(mouseYSpring, [-0.5, 0.5], ['0%', '100%']);
 
   const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
+    if (isTouchDevice || !cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
@@ -41,7 +50,7 @@ export const TiltCard3D = ({
   };
 
   const handleMouseEnter = () => {
-    setIsHovered(true);
+    if (!isTouchDevice) setIsHovered(true);
   };
 
   const handleMouseLeave = () => {
@@ -57,12 +66,12 @@ export const TiltCard3D = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{
-        rotateX,
-        rotateY,
+        rotateX: isTouchDevice ? 0 : rotateX,
+        rotateY: isTouchDevice ? 0 : rotateY,
         transformStyle: 'preserve-3d',
       }}
       animate={{
-        scale: isHovered ? scale : 1,
+        scale: isHovered && !isTouchDevice ? scale : 1,
       }}
       transition={{
         scale: { duration: 0.25, ease: 'easeOut' },
@@ -70,12 +79,18 @@ export const TiltCard3D = ({
       className={`relative will-change-transform ${className}`}
     >
       {/* 3D Content Container */}
-      <div style={{ transform: 'translateZ(20px)', transformStyle: 'preserve-3d' }} className="h-full">
+      <div 
+        style={{ 
+          transform: isTouchDevice ? 'none' : 'translateZ(20px)', 
+          transformStyle: 'preserve-3d' 
+        }} 
+        className="h-full"
+      >
         {children}
       </div>
 
-      {/* Dynamic Specular Glare Effect */}
-      {showGlare && isHovered && (
+      {/* Dynamic Specular Glare Effect (Only for Desktop fine pointer) */}
+      {!isTouchDevice && showGlare && isHovered && (
         <motion.div
           className="pointer-events-none absolute inset-0 rounded-3xl overflow-hidden z-30"
           style={{
