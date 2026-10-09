@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ROOMS } from '../data/hotelData';
-import { Users, Bed, Eye, Calendar, Sparkles, Check, ArrowRight, ShieldCheck, Tag } from 'lucide-react';
+import { Users, Bed, Eye, Calendar, Sparkles, Check } from 'lucide-react';
+import { TiltCard3D } from './TiltCard3D';
 
 export const RoomsSection = ({ onSelectRoomForBooking }) => {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -13,11 +15,17 @@ export const RoomsSection = ({ onSelectRoomForBooking }) => {
     : ROOMS.filter(r => r.category === activeCategory);
 
   return (
-    <section id="rooms" className="py-24 px-4 sm:px-6 lg:px-8 relative bg-[#0b101c]">
+    <section id="rooms" className="py-24 px-4 sm:px-6 lg:px-8 relative bg-[#0b101c] overflow-hidden [perspective:1200px]">
       <div className="max-w-7xl mx-auto">
         
-        {/* Section Heading */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
+        {/* Section Heading with 3D Reveal */}
+        <motion.div 
+          initial={{ opacity: 0, y: 40, rotateX: 10 }}
+          whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.8 }}
+          className="text-center max-w-3xl mx-auto mb-12"
+        >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 text-amber-400 text-xs font-semibold tracking-wider uppercase mb-3 border border-amber-500/20">
             <Sparkles className="w-3.5 h-3.5" /> Accommodations & Suites
           </div>
@@ -44,104 +52,122 @@ export const RoomsSection = ({ onSelectRoomForBooking }) => {
               </button>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        {/* Rooms Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-          {filteredRooms.map((room) => (
-            <div
-              key={room.id}
-              className="glass-card rounded-3xl overflow-hidden border border-amber-500/20 hover:border-amber-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-amber-950/40 flex flex-col group"
-            >
-              {/* Room Image Container */}
-              <div className="relative aspect-[16/10] overflow-hidden">
-                <img
-                  src={room.image}
-                  alt={room.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                
-                {/* Floating Tag */}
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-amber-500 text-slate-950 shadow-md">
-                    {room.tag}
-                  </span>
-                </div>
-
-                {/* Price Badge */}
-                <div className="absolute bottom-4 right-4 glass-panel px-4 py-2 rounded-2xl border border-amber-500/30">
-                  <div className="text-[11px] text-slate-300 line-through">₹{room.originalPrice}</div>
-                  <div className="text-xl font-bold font-serif text-amber-400">
-                    ₹{room.price} <span className="text-xs text-slate-300 font-sans font-normal">/ night</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Room Content */}
-              <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-amber-400">
-                      {room.category}
-                    </span>
-                    <span className="text-xs text-slate-400">{room.size}</span>
-                  </div>
-
-                  <h3 className="font-serif text-2xl font-bold text-white mb-3 group-hover:text-amber-300 transition">
-                    {room.name}
-                  </h3>
-
-                  {/* Bed & Capacity metadata */}
-                  <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-slate-300 mb-6 pb-6 border-b border-slate-800">
-                    <div className="flex items-center gap-1.5">
-                      <Bed className="w-4 h-4 text-amber-400" />
-                      <span>{room.bed}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <Users className="w-4 h-4 text-amber-400" />
-                      <span>{room.capacity}</span>
-                    </div>
-                  </div>
-
-                  {/* Room Features (first 4) */}
-                  <div className="space-y-2 mb-8">
-                    {room.features.slice(0, 4).map((feat, idx) => (
-                      <div key={idx} className="flex items-center gap-2 text-xs sm:text-sm text-slate-300">
-                        <Check className="w-4 h-4 text-amber-400 shrink-0" />
-                        <span>{feat}</span>
+        {/* 3D Rooms Grid */}
+        <motion.div 
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8"
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredRooms.map((room) => (
+              <motion.div
+                key={room.id}
+                layout
+                initial={{ opacity: 0, scale: 0.9, y: 40 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+              >
+                <TiltCard3D maxTilt={8} scale={1.02} className="h-full">
+                  <div className="glass-card rounded-3xl overflow-hidden border border-amber-500/25 hover:border-amber-500/60 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-amber-950/40 flex flex-col h-full group [transform-style:preserve-3d]">
+                    {/* Room Image Container */}
+                    <div className="relative aspect-[16/10] overflow-hidden">
+                      <img
+                        src={room.image}
+                        alt={room.name}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
+                      
+                      {/* 3D Floating Tag */}
+                      <div className="absolute top-4 left-4 [transform:translateZ(30px)]">
+                        <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-amber-500 text-slate-950 shadow-lg shadow-black/50">
+                          {room.tag}
+                        </span>
                       </div>
-                    ))}
+
+                      {/* 3D Price Badge */}
+                      <div className="absolute bottom-4 right-4 glass-panel px-4 py-2 rounded-2xl border border-amber-500/40 shadow-xl [transform:translateZ(35px)]">
+                        <div className="text-[11px] text-slate-300 line-through">₹{room.originalPrice}</div>
+                        <div className="text-xl font-bold font-serif text-amber-400">
+                          ₹{room.price} <span className="text-xs text-slate-300 font-sans font-normal">/ night</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Room Content */}
+                    <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between [transform:translateZ(20px)]">
+                      <div>
+                        <div className="flex items-center justify-between gap-2 mb-2">
+                          <span className="text-xs font-semibold uppercase tracking-wider text-amber-400">
+                            {room.category}
+                          </span>
+                          <span className="text-xs text-slate-400">{room.size}</span>
+                        </div>
+
+                        <h3 className="font-serif text-2xl font-bold text-white mb-3 group-hover:text-amber-300 transition">
+                          {room.name}
+                        </h3>
+
+                        {/* Bed & Capacity metadata */}
+                        <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-slate-300 mb-6 pb-6 border-b border-slate-800">
+                          <div className="flex items-center gap-1.5">
+                            <Bed className="w-4 h-4 text-amber-400" />
+                            <span>{room.bed}</span>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            <Users className="w-4 h-4 text-amber-400" />
+                            <span>{room.capacity}</span>
+                          </div>
+                        </div>
+
+                        {/* Room Features */}
+                        <div className="space-y-2 mb-8">
+                          {room.features.slice(0, 4).map((feat, idx) => (
+                            <div key={idx} className="flex items-center gap-2 text-xs sm:text-sm text-slate-300">
+                              <Check className="w-4 h-4 text-amber-400 shrink-0" />
+                              <span>{feat}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Card CTA Buttons */}
+                      <div className="grid grid-cols-2 gap-3 pt-4 border-t border-slate-800/80 [transform:translateZ(25px)]">
+                        <button
+                          onClick={() => setSelectedRoomModal(room)}
+                          className="flex items-center justify-center gap-1.5 py-3 rounded-xl bg-slate-900/90 text-slate-200 text-xs sm:text-sm font-semibold hover:bg-slate-800 border border-slate-700/80 transition cursor-pointer hover:border-amber-400/40"
+                        >
+                          <Eye className="w-4 h-4 text-slate-400" />
+                          <span>View Details</span>
+                        </button>
+
+                        <button
+                          onClick={() => onSelectRoomForBooking(room.id)}
+                          className="flex items-center justify-center gap-1.5 py-3 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 text-slate-950 text-xs sm:text-sm font-bold shadow-md shadow-amber-500/25 hover:shadow-amber-500/40 hover:scale-[1.03] active:scale-[0.98] transition-all cursor-pointer"
+                        >
+                          <Calendar className="w-4 h-4" />
+                          <span>Book Now</span>
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-
-                {/* Card CTA Buttons */}
-                <div className="grid grid-cols-2 gap-3 pt-4 border-t border-slate-800/80">
-                  <button
-                    onClick={() => setSelectedRoomModal(room)}
-                    className="flex items-center justify-center gap-1.5 py-3 rounded-xl bg-slate-900/90 text-slate-200 text-xs sm:text-sm font-semibold hover:bg-slate-800 border border-slate-700/80 transition cursor-pointer"
-                  >
-                    <Eye className="w-4 h-4 text-slate-400" />
-                    <span>View Details</span>
-                  </button>
-
-                  <button
-                    onClick={() => onSelectRoomForBooking(room.id)}
-                    className="flex items-center justify-center gap-1.5 py-3 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 text-slate-950 text-xs sm:text-sm font-bold shadow-md shadow-amber-500/25 hover:shadow-amber-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
-                  >
-                    <Calendar className="w-4 h-4" />
-                    <span>Book Now</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+                </TiltCard3D>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
 
       {/* Room Details Modal */}
       {selectedRoomModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
-          <div className="glass-panel w-full max-w-3xl rounded-3xl overflow-hidden border border-amber-500/30 max-h-[90vh] flex flex-col shadow-2xl">
+          <motion.div 
+            initial={{ scale: 0.9, opacity: 0, y: 30 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            className="glass-panel w-full max-w-3xl rounded-3xl overflow-hidden border border-amber-500/40 max-h-[90vh] flex flex-col shadow-2xl"
+          >
             {/* Modal Header */}
             <div className="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-900/90">
               <div>
@@ -165,7 +191,7 @@ export const RoomsSection = ({ onSelectRoomForBooking }) => {
               {/* Image Preview Gallery */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {selectedRoomModal.gallery.map((img, idx) => (
-                  <div key={idx} className="rounded-2xl overflow-hidden aspect-[4/3] border border-slate-800">
+                  <div key={idx} className="rounded-2xl overflow-hidden aspect-[4/3] border border-slate-800 hover:border-amber-400/40 transition">
                     <img src={img} alt={`${selectedRoomModal.name} view ${idx + 1}`} className="w-full h-full object-cover" />
                   </div>
                 ))}
@@ -227,7 +253,7 @@ export const RoomsSection = ({ onSelectRoomForBooking }) => {
                 Proceed to Book This Room
               </button>
             </div>
-          </div>
+          </motion.div>
         </div>
       )}
     </section>

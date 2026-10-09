@@ -13,6 +13,7 @@ import { Footer } from './components/Footer';
 import { BookingModal } from './components/BookingModal';
 import { AdminDashboard } from './components/AdminDashboard';
 import { FloatingActions } from './components/FloatingActions';
+import { ScrollProgressBar } from './components/ScrollProgressBar';
 import { INITIAL_BOOKINGS } from './data/hotelData';
 
 export function App() {
@@ -86,6 +87,9 @@ export function App() {
 
   return (
     <div className="min-h-screen bg-[#0b101c] text-slate-100 flex flex-col font-sans selection:bg-amber-500 selection:text-slate-950">
+      {/* 3D Golden Scroll Progress Indicator */}
+      <ScrollProgressBar />
+
       {/* Navigation Header */}
       <Navbar
         onOpenBooking={() => {

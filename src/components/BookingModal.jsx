@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
 import { ROOMS, HOTEL_INFO } from '../data/hotelData';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Calendar, 
   Users, 
@@ -113,8 +113,13 @@ export const BookingModal = ({ isOpen, onClose, initialData, onAddBooking }) => 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in overflow-y-auto">
-      <div className="glass-panel w-full max-w-2xl rounded-3xl overflow-hidden border border-amber-500/30 shadow-2xl my-6 flex flex-col max-h-[92vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto [perspective:1200px]">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.92, y: 30, rotateX: 6 }}
+        animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        className="glass-panel w-full max-w-2xl rounded-3xl overflow-hidden border border-amber-500/40 shadow-2xl my-6 flex flex-col max-h-[92vh] [transform-style:preserve-3d]"
+      >
         
         {/* Modal Header */}
         <div className="p-5 sm:p-6 border-b border-slate-800 bg-slate-900/95 flex items-center justify-between shrink-0">
@@ -417,7 +422,7 @@ export const BookingModal = ({ isOpen, onClose, initialData, onAddBooking }) => 
           )}
         </div>
 
-      </div>
+      </motion.div>
     </div>
   );
 };

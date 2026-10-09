@@ -1,15 +1,23 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { HOTEL_INFO } from '../data/hotelData';
-import { Users2, Sparkles, Check, Phone, CalendarCheck, MessageSquare, Mic2 } from 'lucide-react';
+import { Sparkles, Check, Phone, MessageSquare } from 'lucide-react';
+import { TiltCard3D } from './TiltCard3D';
 
 export const BanquetSection = ({ onOpenBooking }) => {
   return (
-    <section id="banquet" className="py-24 px-4 sm:px-6 lg:px-8 relative bg-[#090e18]">
+    <section id="banquet" className="py-24 px-4 sm:px-6 lg:px-8 relative bg-[#090e18] overflow-hidden [perspective:1000px]">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           {/* Left Text & Details */}
-          <div className="lg:col-span-6">
+          <motion.div 
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.9, ease: 'easeOut' }}
+            className="lg:col-span-6"
+          >
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 text-amber-400 text-xs font-semibold tracking-wider uppercase mb-4 border border-amber-500/20">
               <Sparkles className="w-3.5 h-3.5" /> Events & Celebrations
             </div>
@@ -30,7 +38,7 @@ export const BanquetSection = ({ onOpenBooking }) => {
                 { title: 'Bespoke Catering', desc: 'Customizable vegetarian & non-veg lavish buffet spreads.' },
                 { title: 'Full Climate Control', desc: 'Centralized air conditioning and backup power guarantee.' },
               ].map((item, idx) => (
-                <div key={idx} className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+                <div key={idx} className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-amber-500/30 transition">
                   <div className="flex items-center gap-2 text-amber-400 font-semibold text-sm mb-1">
                     <Check className="w-4 h-4" /> {item.title}
                   </div>
@@ -53,35 +61,43 @@ export const BanquetSection = ({ onOpenBooking }) => {
 
               <a
                 href={`tel:${HOTEL_INFO.phone}`}
-                className="flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-800 text-amber-400 font-semibold text-sm border border-amber-500/30 hover:bg-slate-700 transition"
+                className="flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-800 text-amber-400 font-semibold text-sm border border-amber-500/30 hover:bg-slate-700 transition hover:scale-105"
               >
                 <Phone className="w-4 h-4" />
                 <span>Call Event Coordinator</span>
               </a>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right Image Showcase */}
-          <div className="lg:col-span-6">
-            <div className="relative rounded-3xl overflow-hidden border border-amber-500/20 shadow-2xl group aspect-[4/3]">
-              <img
-                src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1200&q=80"
-                alt="Royal Banquet Hall Hotel Shri Ram International"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
-              
-              <div className="absolute bottom-6 left-6 right-6 glass-panel p-4 rounded-2xl border border-amber-500/30 flex items-center justify-between">
-                <div>
-                  <div className="text-white font-bold text-base">Grand Celebrations & Corporate Meets</div>
-                  <div className="text-xs text-amber-400">Custom packages with room blocks available</div>
-                </div>
-                <div className="px-3 py-1.5 rounded-xl bg-amber-500 text-slate-950 font-black text-xs">
-                  350+ Cap
+          {/* Right 3D Image Showcase */}
+          <motion.div 
+            initial={{ opacity: 0, x: 40, rotateY: -10 }}
+            whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.9, ease: 'easeOut' }}
+            className="lg:col-span-6 [transform-style:preserve-3d]"
+          >
+            <TiltCard3D maxTilt={10} scale={1.02}>
+              <div className="relative rounded-3xl overflow-hidden border border-amber-500/30 shadow-2xl group aspect-[4/3] [transform-style:preserve-3d]">
+                <img
+                  src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1200&q=80"
+                  alt="Royal Banquet Hall Hotel Shri Ram International"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                
+                <div className="absolute bottom-6 left-6 right-6 glass-panel p-4 rounded-2xl border border-amber-500/40 flex items-center justify-between [transform:translateZ(35px)] shadow-xl">
+                  <div>
+                    <div className="text-white font-bold text-base">Grand Celebrations & Corporate Meets</div>
+                    <div className="text-xs text-amber-400">Custom packages with room blocks available</div>
+                  </div>
+                  <div className="px-3 py-1.5 rounded-xl bg-amber-500 text-slate-950 font-black text-xs shadow-md">
+                    350+ Cap
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </TiltCard3D>
+          </motion.div>
 
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { 
   ShieldCheck, 
   Search, 
@@ -160,8 +161,13 @@ export const AdminDashboard = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/85 backdrop-blur-md animate-fade-in overflow-hidden">
-      <div className="glass-panel w-full max-w-6xl rounded-3xl overflow-hidden border border-amber-500/30 shadow-2xl flex flex-col h-[94vh] bg-[#0c1220]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/85 backdrop-blur-md overflow-hidden [perspective:1200px]">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.93, y: 25, rotateX: 6 }}
+        animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        className="glass-panel w-full max-w-6xl rounded-3xl overflow-hidden border border-amber-500/30 shadow-2xl flex flex-col h-[94vh] bg-[#0c1220] [transform-style:preserve-3d]"
+      >
         
         {/* Top Header */}
         <div className="p-4 sm:p-6 border-b border-slate-800 bg-slate-900/90 flex flex-wrap items-center justify-between gap-4 shrink-0">
@@ -658,7 +664,7 @@ export const AdminDashboard = ({
           </div>
         )}
 
-      </div>
+      </motion.div>
     </div>
   );
 };
