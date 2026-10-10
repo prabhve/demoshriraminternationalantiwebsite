@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { ROOMS, HOTEL_INFO } from '../data/hotelData';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
