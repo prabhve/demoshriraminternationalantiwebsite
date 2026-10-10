@@ -105,7 +105,7 @@ export const Hero = ({ onOpenBookingWithDetails }) => {
           transition={{ duration: 0.9, delay: 0.15, ease: 'easeOut' }}
           className="font-serif text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white max-w-5xl mx-auto leading-[1.15] mb-6 [transform:translateZ(40px)]"
         >
-          Experience <span className="text-gold-gradient italic">Royal Comfort</span> & 3D Luxury in Anpara
+          Experience <span className="text-gold-gradient italic">Royal Comfort</span> & Premium Luxury in Anpara
         </motion.h1>
 
         {/* Subtitle */}
